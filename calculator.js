@@ -16,16 +16,23 @@ const divide = (num1, num2) => {
 
 // Step 02: Create a Validation Function for Inputs
 function validateInputs(num1, num2) {
-    if (typeof num1 !== "number" || typeof num2 !== "number") {
-        return "Both inputs must be numbers";
-    } else {
-        return null;
-    }
-};
+  if (!isNumber(num1) || !isNumber(num2)) {
+    return "Both inputs must be numbers";
+  }
+  return null;
+}
+
+// helper function
+function isNumber(value) {
+  return typeof value === "number" && !isNaN(value);
+}
+
 
 // Step 03: Create a Calculator Function to Combine the Above Functions
 function calculator(num1, num2, operation) {
-    validateInputs(num1, num2);
+    if (validateInputs(num1, num2)) {
+        return validateInputs(num1, num2);
+    }
     switch (operation) {
         case 'add':
             return `Add result : ${add(num1, num2)}`;
@@ -42,6 +49,8 @@ function calculator(num1, num2, operation) {
 
 // Example test case
 console.log(calculator(20, 15, 'add')); // returns Add result : 35
+console.log(calculator(20, "15", 'add')); 
+console.log(calculator(20, 15));
 console.log(calculator(20, 15, 'subtract')); // returns Subtract result : 5
 console.log(calculator(20, 15, 'multiply')); // returns Multiply result : 300
 console.log(calculator(20, 10, "divide")); // returns Divide result : 2
